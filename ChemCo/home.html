@@ -1,0 +1,78 @@
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content = "ie=edge">
+        <link rel="stylesheet" href="home.css" />
+        
+        <title>ChemCo Outlet</title>
+    </head>
+    
+    <body>
+        <ul id="Menu_ul">
+            <li id="Menu_li logo"><img id="logoMini" src="https://scontent.fcxl1-2.fna.fbcdn.net/v/t1.6435-9/174423904_102660641963195_8920762578490893032_n.png?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=cMicJ8xa4oUQ7kNvgHvU4_0&_nc_ht=scontent.fcxl1-2.fna&oh=00_AYCyxIzrApmFss4hhZ9cP5HyxqjLOVxn5w9TK7kN9X3A9g&oe=66F0C7DC" alt="logo"></li>
+            <div id="centerItems">
+                <li id = "Menu_li"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/ChemCo/login.html">Login </a></li>     
+            </div>
+        </ul>
+        
+    </body> 
+    <style>
+    
+#Menu_ul 
+{
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    justify-content: space-between; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+#Menu_li 
+{
+    float: left;
+}
+
+#Menu_li a 
+{
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-family: Tahoma, sans-serif;
+    font-weight: bold;
+}
+
+#Menu_li a:hover 
+{
+    background-color:grey;
+}
+#logoMini {
+    height: 50px;
+    width: 50px;
+}
+#Menu_li.logo {
+    margin-right: auto; /* Pushes the logo to the left */
+}
+
+#centerItems {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+body{
+    position:relative;
+    background-image: url('https://www.safeatworkca.com/siteassets/images/hero-general/adobestock_425741255_personal_hygiene_h.jpg');
+    height: 650px;
+    width: 1422px;
+    background-size: cover; /* Ensure the image covers the container */
+    background-repeat: no-repeat;
+    margin-top: auto;
+}
+    </style>
+</html>

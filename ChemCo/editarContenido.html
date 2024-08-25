@@ -1,0 +1,122 @@
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content = "ie=edge">
+        
+        <title>ChemCo Outlet</title>
+    </head>
+    
+    <body>
+        <ul id="Menu_ul">
+            <li id="Menu_li logo"><a href = "file:///Users/anaceciliaguerra/Desktop/VueJs/ChemCo/admin.html"><img id="logoMini" src="https://scontent.fcxl1-2.fna.fbcdn.net/v/t1.6435-9/174423904_102660641963195_8920762578490893032_n.png?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=cMicJ8xa4oUQ7kNvgHvU4_0&_nc_ht=scontent.fcxl1-2.fna&oh=00_AYCyxIzrApmFss4hhZ9cP5HyxqjLOVxn5w9TK7kN9X3A9g&oe=66F0C7DC" alt="logo"></a></li>
+            <div id="centerItems">
+                <li id = "Menu_li"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/ChemCo/home.html">Sign Out</a></li>
+            </div>
+        </ul>
+    
+        <a href = "file:///Users/anaceciliaguerra/Desktop/VueJs/ChemCo/admin.html"><img id = "arrow" src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBI64gUJ-06sAY7ryEd6jkJPm7vVEE4yYqsA&s" width= "50px" hieght = "50px" ></a>
+        <br>
+
+        <table style = "margin-left: 255px;" class = "design-table" >
+            <tr>
+                <td>
+                    <a href = "file:///Users/anaceciliaguerra/Desktop/VueJs/ChemCo/editarCorreo.html"><img src = "https://static.vecteezy.com/system/resources/previews/004/910/212/original/sending-letter-email-isolated-cute-mail-cartoon-face-illustration-vector.jpg" height="70px" width="70px"></a>
+                    <br>
+                    <h3>Editar Correo</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href = "file:///Users/anaceciliaguerra/Desktop/VueJs/ChemCo/editarTelefono.html"><img src = "https://img.freepik.com/premium-vector/hands-with-smartphone-dialing-mobile-touch-screen-phone-with-numbers-pad-cellphone-dial-connection-cartoon-vector-illustration_662353-913.jpg" height="60px" width="60px"></a>
+                    <br>
+                    <h3>Editar Telefono</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href = "file:///Users/anaceciliaguerra/Desktop/VueJs/ChemCo/cambiarSellos.html"><img src = "https://cdn-icons-png.flaticon.com/512/6889/6889485.png" height="30px" width="30px"></a>
+                    <br>
+                    <h3>Cambiar Numero de Sellos</h3>
+                </td>
+            </tr>
+        </table>
+
+    </body> 
+    <style>
+    
+#Menu_ul 
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+#Menu_li 
+{
+    float: left;
+}
+
+#Menu_li a 
+{
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-family: Tahoma, sans-serif;
+    font-weight: bold;
+}
+
+#Menu_li a:hover 
+{
+    background-color:grey;
+}
+#logoMini {
+    height: 50px;
+    width: 50px;
+}
+#Menu_li.logo {
+    margin-right: auto; /* Pushes the logo to the left */
+}
+
+#centerItems {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.design-table {
+    display:flex;
+    border-spacing: 20px;
+}
+
+body
+{
+    position:relative;
+    background-image: url('https://www.progressive.com/lifelanes/wp-content/uploads/2023/01/PR1593_LL_OpenHouseCleaning_Header.jpg');
+    height: 650px;
+    width: 1422px;
+    background-size: cover; /* Ensure the image covers the container */
+    background-repeat: no-repeat;
+    margin-top: auto;
+}
+/* Optional styling for table cells */
+.design-table td {
+    padding: 10px;
+    border: 10px solid #2093c5;
+    font-family: Tahoma, sans-serif;
+    text-align: center;
+    background-color: white;
+}
+#arrow
+{
+    margin-left: 150px; /* Adjust this value to move the image more to the right */
+    margin-right: 20px; /* Adjust this value if you need spacing on the right */
+}
+    </style>
+</html>

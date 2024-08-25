@@ -1,0 +1,335 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ChemCo Outlet</title>
+
+    <style>
+  
+  #Menu_ul 
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+#Menu_li 
+{
+    float: left;
+}
+
+#Menu_li a 
+{
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-family: Tahoma, sans-serif;
+    font-weight: bold;
+}
+
+#Menu_li a:hover 
+{
+    background-color:grey;
+}
+#logoMini {
+    height: 50px;
+    width: 50px;
+}
+#Menu_li.logo {
+    margin-right: auto; /* Pushes the logo to the left */
+}
+
+#centerItems {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+    #cancel {
+        color: white;
+        text-decoration: none;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Full-width input fields */
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    input[type=text]:focus, input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        padding: 14px 20px;
+        background-color: #f44336;
+    }
+
+    #handleSubmit {
+        padding: 14px 20px;
+        background-color: #2093c5;
+        display: block;
+        margin-top: 12px;
+        width: 100%;
+        padding: 12px 20px;
+        border-radius: 8px;
+        border-color: transparent;
+        float: left;
+        width: 50%;
+        color: white;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    .cancelbtn {
+        display: block;
+        margin-top: 12px;
+        width: 100%;
+        padding: 12px 20px;
+        border-radius: 8px;
+        border-color: transparent;
+        float: left;
+        width: 50%;
+    }
+
+    /* Add padding to container elements */
+    .container {
+        padding: 16px;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+        .cancelbtn, .signupbtn {
+            width: 100%;
+        }
+    }
+
+    .formcarry-container * {
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+        /* colors */
+        --color-blue: #2093c5;
+        --color-light-blue: #43b8dc;
+        --color-gray: #e5e7eb;
+        --color-dark-gray: #9da3ae;
+    }
+
+    .formcarry-container {
+        /* container */
+        --c-width: 50%;
+        --c-max-width: 500px;
+        width: var(--c-width);
+        max-width: var(--c-max-width);
+        display: block;
+        margin: 10vh auto 0 auto;
+    }
+
+    .formcarry-form label {
+        display: block;
+        padding: 12px 0 2px 0;
+        letter-spacing: -0.2px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .formcarry-form input,
+    .formcarry-form textarea {
+        font-size: 16px;
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: var(--color-gray);
+        border: none;
+        border: 4px solid var(--color-gray);
+        outline: none;
+        border-radius: 8px;
+        color: var(--color-dark-gray);
+    }
+
+    .formcarry-form input:focus,
+    .formcarry-form textarea:focus {
+        background-color: #fff;
+        color: var(--color-dark-gray);
+    }
+
+    .formcarry-form input:focus:required:invalid {
+        border-color: var(--color-blue);
+        background-color: #fff;
+    }
+
+    .formcarry-form button {
+        display: block;
+        margin-top: 12px;
+        width: 100%;
+        padding: 12px 20px;
+        border-radius: 8px;
+        border-color: transparent;
+        background-color: var(--color-blue);
+        color: #fff;
+        font-weight: 700;
+        font-size: 18px;
+        transition: 300ms all;
+    }
+
+    .formcarry-form button:hover {
+        background-color: var(--color-light-blue);
+    }
+
+    .formcarry-alert {
+        padding: 12px;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 400;
+        margin-top: 12px;
+        display: none;
+    }
+
+    .formcarry-alert.visible {
+        display: block;
+    }
+
+    .formcarry-alert.success {
+        background: #2093c5;
+    }
+
+    .formcarry-alert.error {
+        background: #de524c;
+    }
+    #arrow
+{
+    margin-left: 350px; /* Adjust this value to move the image more to the right */
+    margin-right: 20px; /* Adjust this value if you need spacing on the right */
+}
+    </style>
+</head>
+<body>
+    <ul id="Menu_ul">
+        <li id="Menu_li logo"><img id="logoMini" src="https://scontent.fcxl1-2.fna.fbcdn.net/v/t1.6435-9/174423904_102660641963195_8920762578490893032_n.png?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=cMicJ8xa4oUQ7kNvgHvU4_0&_nc_ht=scontent.fcxl1-2.fna&oh=00_AYCyxIzrApmFss4hhZ9cP5HyxqjLOVxn5w9TK7kN9X3A9g&oe=66F0C7DC" alt="logo"></li>
+        <div id="centerItems">
+            <li id = "Menu_li"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/ChemCo/home.html">Sign Out</a></li>
+        </div>
+    </ul>
+
+    <a href = "file:///Users/anaceciliaguerra/Desktop/VueJs/ChemCo/editarContenido.html"><img id = "arrow" src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBI64gUJ-06sAY7ryEd6jkJPm7vVEE4yYqsA&s" width= "50px" hieght = "50px" ></a>
+    <br>
+
+    <form>
+        <div class="formcarry-container">
+            <h1>Ingresar cliente</h1>
+            <p>Ingresar el telefono del cliente que quiera modificar</p>
+            <hr>
+            <label for="phone"><b>Telefono</b></label>
+            <input type="text" id="phone" placeholder="Ingresar el telefono" name="telefono" required>
+            
+            <label for="sellos"><b>Sellos deseados</b></label>
+            <input type="text" id="stamps" placeholder="Ingrear la cantidad de sellos deseados" name="sellos" required>
+            
+            <div class="clearfix">
+                <button type="button" class="cancelbtn"><a id="cancel" href="file:///Users/anaceciliaguerra/Desktop/VueJs/ChemCo/admin.html">Cancel</a></button>
+                <input type="button" id="handleSubmit" onclick="logInToPage()" value="Cambiar Numero de Sellos">
+            </div>
+        </div>
+    </form>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCXGwTEJT-pksfnJbzs7dpUZkeGoZn-HT4",
+            authDomain: "chemcoapp.firebaseapp.com",
+            projectId: "chemcoapp",
+            storageBucket: "chemcoapp.appspot.com",
+            messagingSenderId: "1098458315928",
+            appId: "1:1098458315928:web:aa93a4595a1547bc2b64ed",
+            measurementId: "G-4YHVCNPE72"
+        };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const database = getDatabase(app);
+
+      window.logInToPage = async function() {
+    const userPhoneNumber = document.getElementById("phone").value;
+    const currentStamp = document.getElementById("stamps").value;
+
+    const usersRef = ref(database, 'users');
+
+    get(usersRef).then((snapshot) => {
+        let clientFound = false;
+
+        if (snapshot.exists()) 
+        {
+            snapshot.forEach(childSnapshot => 
+            {
+                const data = childSnapshot.val();
+                if (data.phone === userPhoneNumber) 
+                {
+                    // Phone number found, check and update the stamp
+                    const userRef = childSnapshot.ref;
+                    
+                        set(userRef, {
+                            ...data,
+                            stamps: currentStamp,
+                        }).then(() => {
+                            alert("Sellos actuales: " + currentStamp);
+                            window.location.href = "file:///Users/anaceciliaguerra/Desktop/VueJs/ChemCo/admin.html";
+                        }).catch(error => {
+                            alert("Error al actualizar los datos: " + error.message);
+                        });
+                    
+                    clientFound = true;
+                    return; // Exit the loop
+                }
+            });
+
+            if (!clientFound) {
+                alert("Numero telefonico no encontrado.");
+            }
+        } else {
+            alert("No hay informacion disponible.");
+        }
+    }).catch(error => {
+        alert("Error al tomar los datos: " + error.message);
+    });
+}
+    </script>
+ </body>
+</html>
