@@ -1,0 +1,31 @@
+<html>
+    <body>
+        <form>
+            Pokemon: <input type="text" id="pokename"><br><br>
+            <input type="button" onclick="getPoke()" value="Dame Pokemon">
+        </form>
+        <br>
+        <img src="" id="pokeimg"><img src="" id="pokeimg2"><br>
+        <span id="poketype"></span>
+    </body>
+    <script>
+        function getPoke(){
+            let pokename = document.getElementById("pokename").value
+
+            fetch("https://pokeapi.co/api/v2/pokemon/" + pokename)
+                .then( (response) => response.json())
+                .then( (data) => parsePoke(data))
+                .catch( (error) => console.log(error))
+        }
+
+        function parsePoke(json){
+            let pokemonImage = json.sprites.front_default
+            let pokemonImage2 = json.sprites.front_shiny
+            let poketype = json.types[0].type.name
+            console.log(poketype)
+            document.getElementById("pokeimg").src = pokemonImage
+            document.getElementById("pokeimg2").src = pokemonImage2
+            document.getElementById("poketype").innerText = "Type: " + poketype
+        }
+    </script>
+</html>

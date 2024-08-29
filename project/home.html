@@ -1,0 +1,111 @@
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content = "ie=edge">
+        <link rel="stylesheet" href="formcarry-form.css" />
+        
+        <title>Revelation</title>
+    </head>
+    
+    <body>
+        <ul id ="Menu_ul">
+            <li id = "Menu_li"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/home.html"><img id = "logoMini" src="https://www.clker.com/cliparts/e/z/G/F/y/3/black-and-white-sunglass-frames-md.png" alt = "logo"></a></li>
+            <li id = "Menu_li"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/contact.html">Contact</a></li>
+            <li id = "Menu_li"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/signUp.html">Sign Up</a></li>
+            <li id = "Menu_li"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/login.html">Login </a></li> 
+        </ul>
+        <center>
+        <div class="carousel"> 
+            <img src="https://media.glamour.com/photos/56957a138fa134644ec21f46/16:9/w_2580%2Cc_limit/entertainment-2014-02-03-titanic-main.jpg" alt="Image 1"> 
+            <img src="https://www.boredpanda.com/blog/wp-content/uploads/2015/08/epic-movie-scenes-screenshots-73__880.jpg" alt="Image 2"> 
+            <img src="https://www.boredpanda.com/blog/wp-content/uploads/2015/08/epic-movie-scenes-screenshots-51__880.jpg" alt="Image 3"> 
+        </div>
+        </center>
+    </body>
+    
+    <style>   
+
+    #Menu_ul 
+    {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: black;
+    }
+
+    #Menu_li 
+    {
+        float: left;
+    }
+
+    #Menu_li a 
+    {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+    }
+
+    #Menu_li a:hover 
+    {
+        background-color:grey;
+    }
+    #logoMini {
+        height: 15px;
+        width: 40px;
+    }
+    #titanic {
+        height: 650px;
+        width: 1425px;
+    }
+    .carousel { 
+      width: 1425px; 
+      height: 650px; 
+      overflow: hidden; 
+      position: relative; 
+    } 
+ 
+    .carousel img { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      opacity: 0; 
+      animation: carousel 15s infinite linear; 
+    } 
+ 
+    .carousel img:nth-child(1) { 
+      animation-delay: 0s; 
+    } 
+ 
+    .carousel img:nth-child(2) { 
+      animation-delay: 5s; 
+    } 
+ 
+    .carousel img:nth-child(3) { 
+      animation-delay: 10s; 
+    } 
+ 
+    @keyframes carousel { 
+      0% { 
+        opacity: 0; 
+      } 
+      20% { 
+        opacity: 1; 
+      } 
+      33.33% { 
+        opacity: 1; 
+      } 
+      53.33% { 
+        opacity: 0; 
+      } 
+      100% { 
+        opacity: 0; 
+      } 
+    } 
+    </style>
+</html>
