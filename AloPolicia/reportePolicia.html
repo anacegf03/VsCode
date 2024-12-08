@@ -1,0 +1,141 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ALO POLICIA</title>
+       <link rel="stylesheet" href="reportePolicia.css">
+    </head>
+    <body>
+        <ul id="Menu_ul">
+            <li id="Menu_li logo">
+                <img id="logoMini" src="https://i.pinimg.com/originals/a1/df/6b/a1df6b6588e7f8a03739607a9878c0c1.png" alt="logo">
+            </li>
+            <div id="centerItems">
+                <li id="Menu_li"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/AloPolicia/paginaIncial.html">Sign Out</a></li>
+            </div>
+        </ul>
+        
+        <div class = "formcarry-container" style="text-align: center; margin-top: 20px;">
+            <label for="cuidInput"><b>CUID</b></label>
+            <input type="text" id="cuidInput" placeholder="Ingrese su CUID">
+            
+            <label for="passwordInput"><b>Password</b></label>
+            <input type="password" id="passwordInput" placeholder="Ingrese su contraseña">
+            
+            <button class ="reportBtn" onclick="authenticateUser()">Ver Reportes</button>
+        </div>
+    
+        <!-- Initially hidden elements -->
+        <div class="user-count hidden" id="userCount">Cantidad de Reportes: 0</div>
+        <br>
+    
+        <center>
+            <table id="userTable" class="hidden">
+                <thead>
+                    <tr>
+                        <th>Folio</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Situacion</th>
+                        <th>Ubicacion</th>
+                        <th>Fechas de Reporte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </center>  
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
+            import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+            import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyC_NWe1lO-eJQ41We8vSdKxRV7c51WXXAI",
+                authDomain: "alopolicia-3cf5d.firebaseapp.com",
+                databaseURL: "https://alopolicia-3cf5d-default-rtdb.firebaseio.com",
+                projectId: "alopolicia-3cf5d",
+                storageBucket: "alopolicia-3cf5d.appsot.com",
+                messagingSenderId: "34476097056",
+                appId: "1:34476097056:web:50bb642a7fd3243d2c8645",
+                measurementId: "G-J2DPGG3HMJ"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const database = getDatabase(app);
+
+            window.authenticateUser = async function() {
+                const cuid = document.getElementById("cuidInput").value;
+                const password = document.getElementById("passwordInput").value;
+                const dataRef = ref(database, 'users');
+
+                try {
+                    const snapshot = await get(dataRef);
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        let authenticatedUser = null;
+
+                        Object.keys(data).forEach(key => {
+                            const user = data[key];
+                            if (user.cuid === cuid && user.password === password && user.usuario === "policia") {
+                                authenticatedUser = user;
+                            }
+                        });
+
+                        if (authenticatedUser) {
+                            console.log("User authenticated successfully");
+                            displayReports(authenticatedUser);
+                        } else {
+                            alert("CUID o contraseña incorrecta");
+                        }
+                    } else {
+                        console.log("No hay información");
+                    }
+                } catch (error) {
+                console.error("Error al obtener datos:", error);
+                }
+            };
+            function displayReports(user) {
+                const tableBody = document.querySelector('#userTable tbody');
+                const userCountElement = document.querySelector('#userCount');
+                tableBody.innerHTML = ''; // limpia la tabla
+                let userCount = 0;
+
+                if (user.reporte) {
+                    const reports = user.reporte;
+                    Object.keys(reports).forEach((reportKey) => {
+                        if (reportKey === "placeholder" || reportKey === "0") {
+                            return; // Skip placeholder 
+                        }
+
+                        const report = reports[reportKey];
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${reportKey}</td> <!-- Folio -->
+                            <td>${report[0]}</td> <!-- Nombre -->
+                            <td>${report[1]}</td> <!-- Telefono -->
+                            <td>${report[2]}</td> <!-- Situacion -->
+                            <td>${report[3]}</td> <!-- Situacion -->
+                            <td>${report[4]}</td> <!-- Fecha -->
+                        `;
+
+                        tableBody.appendChild(row);
+                        userCount++;
+                    });
+                }
+
+                userCountElement.textContent = `Cantidad de Reportes: ${userCount}`;
+
+                if (userCount > 0) {
+                    userCountElement.classList.remove('hidden');
+                    document.getElementById('userTable').classList.remove('hidden');
+                    console.log("Table and count made visible");
+                } else {
+                    alert("No reports available for this user");
+                }
+            }
+
+        </script>
+    </body>
+</html>

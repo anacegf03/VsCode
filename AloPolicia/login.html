@@ -1,0 +1,88 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ALO POLICIA</title>
+        <link rel="stylesheet" href="login.css">
+    </head>
+    <body>
+        <center>
+            <a href = "file:///Users/anaceciliaguerra/Desktop/VueJs/AloPolicia/paginaIncial.html"><img id="logoMini" src="https://i.pinimg.com/originals/a1/df/6b/a1df6b6588e7f8a03739607a9878c0c1.png" alt="logo" height = "80px" weight = "100px"></a></li>
+        </center>
+
+        <form>
+            <div class="formcarry-container">
+            <h1>Log In</h1>
+            <p>Please fill in this form to login to your account.</p>
+            <hr>
+
+            <label for="Email"><b> Email</b></label>
+            <input type="text" id = "email" placeholder="Enter email" name="email" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" id ="password" placeholder="Enter Password" name="psw" required>
+            
+            <div class="clearfix">
+                <button class="cancelbtn" onclick="window.location.href='file:///Users/anaceciliaguerra/Desktop/VueJs/AloPolicia/paginaIncial.html'">Cancel</button>
+                <input type="button" id="loginbtn" onclick="logInToPage()" value="Continuar">
+            </div>
+            
+            </div>
+        </form>
+        <script type = "module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
+            import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+            import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyC_NWe1lO-eJQ41We8vSdKxRV7c51WXXAI",
+                authDomain: "alopolicia-3cf5d.firebaseapp.com",
+                databaseURL: "https://alopolicia-3cf5d-default-rtdb.firebaseio.com",
+                projectId: "alopolicia-3cf5d",
+                storageBucket: "alopolicia-3cf5d.appsot.com",
+                messagingSenderId: "34476097056",
+                appId: "1:34476097056:web:50bb642a7fd3243d2c8645",
+                measurementId: "G-J2DPGG3HMJ"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            const auth = getAuth(app);
+            const database = getDatabase(app);
+            
+            window.logInToPage = function() 
+            {
+                const email = document.getElementById("email").value
+                const password = document.getElementById("password").value
+
+                signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    const userId = user.uid;
+
+                    // Now check if this user also exists in the database
+                    const userRef = ref(database, 'users/' + userId);
+                    get(userRef)
+                        .then((snapshot) => {
+                            if (snapshot.exists()) {
+                                const userData = snapshot.val();
+                                if (userData.email === email && password === userData.password) {
+                                    if (userData.usuario === "policia") {
+                                        window.location.href = "file:///Users/anaceciliaguerra/Desktop/VueJs/AloPolicia/reportePolicia.html";
+                                    } else window.location.href = "file:///Users/anaceciliaguerra/Desktop/VueJs/AloPolicia/paginaIncial.html";
+                                } 
+                            }
+                        })
+                    .catch((error) => {
+                        alert("Error en la base de datos. " + error.message);
+                    });
+                })
+                .catch((error) => {
+                    alert("No se encuentra el usuario.");
+                });
+            }
+        </script>
+    </body>
+</html>

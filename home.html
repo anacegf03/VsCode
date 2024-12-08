@@ -1,58 +1,36 @@
-<html lang = "en">
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <meta charset = "UTF-8">
-        <meta name = "viewport" content = "width = device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content = "ie=edge">
-        <link rel="stylesheet" href="formcarry-form.css" />
-        
-        <title>Revelation</title>
-    </head>
-    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>CineVerse</title>
+        <link rel="stylesheet" href="home.css">
+</head>
     <body>
-        <ul id ="Menu_ul">
-            <li id = "Menu_li"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/home.html"><img id = "logoMini" src="https://www.clker.com/cliparts/e/z/G/F/y/3/black-and-white-sunglass-frames-md.png" alt = "logo"></a></li>
-            <li id = "Menu_li"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/contact.html">Contact</a></li>
-            <li id = "Menu_li"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/signUp.html">Sign Up</a></li>
-            <li id = "Menu_li"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/login.html">Login </a></li> 
-        </ul>
+        <header>
+            <a href="file:///Users/anaceciliaguerra/Desktop/VueJs/home.html"><img id="logoMini" src="https://www.clker.com/cliparts/e/z/G/F/y/3/black-and-white-sunglass-frames-md.png" alt="logo"></a>
 
-        <center>
-            <img src="https://goggler.my/wp-content/uploads/2019/12/JM2_INTL_30Sht_BRIDGE_03-e1575889045252.jpg" alt="Image1"  width= 1425px height =650px> 
-        </center>
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <ul id="menu">
+                <li><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/signUp.html">Sign Up</a></li>
+                <li><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/login.html">Login</a></li>
+            </ul>
+        </header>
+
+        <div class="center-image-container">
+            <img src="https://i.pinimg.com/originals/1f/d8/ed/1fd8ed7252386ab22ebd4c79220263c6.jpg" alt="Main Image">
+        </div>
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById('menu');
+                menu.classList.toggle('show');
+            }
+        </script>
     </body>
-    
-    <style>   
-
-#Menu_ul 
-{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: black;
-}
-
-#Menu_li 
-{
-    float: left;
-}
-
-#Menu_li a 
-{
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-}
-
-#Menu_li a:hover 
-{
-    background-color:grey;
-}
-#logoMini {
-    height: 15px;
-    width: 40px;
-}
-    </style>
 </html>

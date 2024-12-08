@@ -1,0 +1,186 @@
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ALO POLICIA</title>
+       <link rel="stylesheet" href="signUp.css">
+    </head>
+</head>
+<body>
+    <center>
+        <a href = "file:///Users/anaceciliaguerra/Desktop/VueJs/AloPolicia/paginaIncial.html"><img id="logoMini" src="https://i.pinimg.com/originals/a1/df/6b/a1df6b6588e7f8a03739607a9878c0c1.png" alt="logo" height = "80px" weight = "100px"></a></li>
+    </center>
+
+    <form>
+        <div class="formcarry-container">
+            <h1>Ingresar cliente</h1>
+            <p>Ingresar los siguientes datos del cliente...</p>
+            <hr>
+            <label for="name"><b>Nombre</b></label>
+            <input type="text" id="name" placeholder="Ingresar el nombre" name="nombre" required>
+            
+            <label for="email"><b>Correo</b></label>
+            <input type="text" id="email" placeholder="Ingrear el correo" name="correo" required>
+            
+            <label for="phone"><b>Telefono</b></label>
+            <input type="text" id="phone" placeholder="Ingresar el telefono" name="telefono" required>
+            
+            <label for="repeat_phone"><b>Repetir el telefono</b></label>
+            <input type="text" id="rpt_phone" placeholder="Ingresar el telefono nuevamente" name="telefonoRepetido" required>
+            
+            <label for="password"><b>Contrasena</b></label>
+            <input type="password" id="password" placeholder="Ingresar tu contrasena. Minimo 6 caracteres" name="password" required>
+            
+            <label for="repeat_password"><b>Repetir la Contrasena</b></label>
+            <input type="password" id="rpt_password" placeholder="Ingresar tu contrasena nuevamente. Minimo 6 caracteres" name="passwordRepetido" required>
+            
+            <label for="policiaCUID"><b>SOLO POLICIAS: Ingresar el CUID</b></label>
+            <input type="text" id="cuid" placeholder="En el caso de ser policia, ingresar el CUID" name="cuid">
+            
+            <div class="clearfix">
+                <button class="cancelbtn" onclick="window.location.href='file:///Users/anaceciliaguerra/Desktop/VueJs/AloPolicia/paginaIncial.html'">Cancel</button>
+                <input type="button" id="handleSubmit" onclick="handleSub()" value="Continuar">
+            </div>
+        </div>
+    </form>
+    <script type= "module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC_NWe1lO-eJQ41We8vSdKxRV7c51WXXAI",
+            authDomain: "alopolicia-3cf5d.firebaseapp.com",
+            databaseURL: "https://alopolicia-3cf5d-default-rtdb.firebaseio.com",
+            projectId: "alopolicia-3cf5d",
+            storageBucket: "alopolicia-3cf5d.appsot.com",
+            messagingSenderId: "34476097056",
+            appId: "1:34476097056:web:50bb642a7fd3243d2c8645",
+            measurementId: "G-J2DPGG3HMJ"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        window.handleSub = function() {
+            const user_name = document.getElementById("name").value;
+            const user_email = document.getElementById("email").value;
+            const user_password = document.getElementById("password").value;
+            const user_rpt_password = document.getElementById("rpt_password").value;
+            const user_phone = document.getElementById("phone").value;
+            const user_rpt_phone = document.getElementById("rpt_phone").value;
+            let cuidPolicia = document.getElementById("cuid").value;
+
+            if (cuidPolicia === "") {//es decir es ciudadano
+                if (user_rpt_phone === user_phone && user_rpt_password === user_password) {
+                    createUserWithEmailAndPassword(auth, user_email, user_password)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        const userId = user.uid;
+                        const newUserRef = ref(database, 'users/' + userId);
+
+                        set(newUserRef, {
+                            name: user_name,
+                            email: user_email,
+                            phone: user_phone,
+                            password: user_password,
+                            usuario: "ciudadano"
+                        })
+                        .then(() => {
+                            window.location.href = "file:///Users/anaceciliaguerra/Desktop/VueJs/AloPolicia/paginaIncial.html";
+                        })
+                        .catch(error => {
+                            alert("Error al subir la informacion: " + error.message);
+                        });
+                    })
+                    .catch((error) => {
+                        alert("Error durante el registro. " + error.message);
+                    });
+                } else {
+                    alert("No coincide la informacion");
+                    resetForm();
+                }
+            } else {
+                const usersRef = ref(database, 'users');
+                get(usersRef)
+                .then((snapshot) => {
+                    let cuidExists = false;
+                    snapshot.forEach((userSnapshot) => {
+                        const userData = userSnapshot.val();
+                        if (userData.cuid === cuidPolicia) {
+                                cuidExists = true;
+                        }
+                    });
+
+                    if (!cuidExists) {
+                        const cuidsRef = ref(database, 'cuids');
+                        get(cuidsRef)
+                        .then((cuidsSnapshot) => {
+                            const cuidsArray = cuidsSnapshot.val();
+                            const cuidFound = Object.values(cuidsArray).includes(cuidPolicia);
+
+                            if (cuidFound) {
+                                if (user_rpt_phone === user_phone && user_rpt_password === user_password) {
+                                    createUserWithEmailAndPassword(auth, user_email, user_password)
+                                    .then((userCredential) => {
+                                        const user = userCredential.user;
+                                        const userId = user.uid;
+                                        const newUserRef = ref(database, 'users/' + userId);
+
+                                        set(newUserRef, {
+                                            name: user_name,
+                                            email: user_email,
+                                            phone: user_phone,
+                                            password: user_password,
+                                            usuario: "policia",
+                                            cuid: cuidPolicia,
+                                            reporte: {0: "placeholder"}
+                                        })
+                                        .then(() => {
+                                            window.location.href = "file:///Users/anaceciliaguerra/Desktop/VueJs/AloPolicia/reportePolicia.html";
+                                        })
+                                        .catch(error => {
+                                            alert("Error al subir la informacion: " + error.message);
+                                        });
+                                    })
+                                    .catch((error) => {
+                                        alert("Error durante el registro. " + error.message);
+                                    });
+                                } else {
+                                    alert("No coincide la informacion");
+                                    resetForm();
+                                }
+                            } else {
+                                alert("CUID no encontrado en la base de datos.");
+                                document.getElementById('cuid').value = "";
+                            }
+                        })
+                        .catch(error => {
+                        alert("Error al verificar CUID: " + error.message);
+                        });
+                    } else {
+                        alert("Este CUID ya está registrado.");
+                        document.getElementById('cuid').value = "";
+                    }
+                })
+                .catch(error => {
+                    alert("Error al verificar usuarios: " + error.message);
+                });
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('phone').value = "";
+            document.getElementById('rpt_phone').value = "";
+            document.getElementById('password').value = "";
+            document.getElementById('rpt_password').value = "";
+            document.getElementById('cuid').value = "";
+        }
+    </script>
+ </body>
+</html>

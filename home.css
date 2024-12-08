@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background-color: #141414;
+    margin: 0;
+}
+
+header {
+    background-color: #1a1a1a;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+#logoMini {
+    height: 15px;
+    width: 40px;
+    transition: transform 0.3s;
+}
+
+#logoMini:hover {
+    transform: scale(1.1);
+}
+
+#menu {
+    display: flex;
+    list-style-type: none;
+}
+
+#menu li {
+    margin: 0 15px;
+}
+
+#menu li a {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 15px;
+    transition: color 0.3s, background-color 0.3s;
+    border-radius: 4px;
+}
+
+#menu li a:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    width: 30px;
+}
+
+.hamburger div {
+    height: 4px;
+    background-color: #fff;
+    margin: 4px 0;
+    transition: 0.4s;
+}
+
+@media (max-width: 768px) {
+    #menu {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background-color: #1a1a1a;
+        width: 200px;
+        border-radius: 8px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    #menu.show {
+        display: flex; 
+    }
+
+    .hamburger {
+        display: flex; 
+    }
+
+    #menu li {
+        margin: 10px 0;
+        text-align: center;
+    }
+}
+
+.center-image-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+.center-image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .center-image-container img {
+        content: url('https://img.buzzfeed.com/buzzfeed-static/static/2022-04/4/20/asset/0f12255e2129/sub-buzz-817-1649105149-10.jpg');
+    }
+}

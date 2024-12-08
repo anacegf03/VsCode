@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>CineVerse</title>
+        <link rel="stylesheet" href="favoritos.css">
+    </head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="recomendations.html"><img class="logo" src="https://www.clker.com/cliparts/e/z/G/F/y/3/black-and-white-sunglass-frames-md.png" alt="logo"></a>
+        </div>
+        <nav>
+            <ul id="menu">
+                <li class="menu-item"><a href="home.html">Sign Out</a></li>
+                <li class="menu-item"><a href="file:///Users/anaceciliaguerra/Desktop/VueJs/recomendations.html">Recomendaciones</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Mis Favoritos</h1>
+    <div class="container" id="favoritesContainer">
+    </div>
+    <script type = "module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+        import { getDatabase, ref, get, remove } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDQ73EFEKxPRZnZrCjF96lkCtGnFn33O9k",
+            authDomain: "apprev-c23c3.firebaseapp.com",
+            databaseURL: "https://apprev-c23c3-default-rtdb.firebaseio.com",
+            projectId: "apprev-c23c3",
+            storageBucket: "apprev-c23c3.appspot.com",
+            messagingSenderId: "808407036147",
+            appId: "1:808407036147:web:4aa2f140ca142fb221c786",
+            measurementId: "G-YXLEGCP3YH"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const database = getDatabase(app);
+
+        let currentUser = null;
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user; 
+                loadFavorites(); 
+            } else {
+                alert("Please log in to view your favorites.");
+                window.location.href = "login.html"; 
+            }
+        });
+
+        function loadFavorites() {
+            const userFavoritesRef = ref(database, `users/${currentUser.uid}/favorites`);
+            get(userFavoritesRef).then((snapshot) => {
+                const container = document.getElementById("favoritesContainer");
+                container.innerHTML = ""; 
+
+                if (snapshot.exists()) {
+                    snapshot.forEach((childSnapshot) => {
+                        const data = childSnapshot.val();
+                        const key = childSnapshot.key;
+                        displayFavorite(data, key); 
+                    });
+                } else {
+                    console.log("No favorites found.");
+                }
+            }).catch((error) => {
+                console.error("Error fetching favorites:", error);
+            });
+        }
+
+        function displayFavorite(data, key) {
+            const container = document.getElementById("favoritesContainer");
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "favorite-item";
+
+            const img = document.createElement("img");
+            img.src = data.movieImage;
+            img.alt = data.movieName;
+            itemDiv.appendChild(img);
+
+            const contentDiv = document.createElement("div");
+            contentDiv.className = "favorite-content";
+
+            const title = document.createElement("h3");
+            title.innerText = data.movieName;
+            contentDiv.appendChild(title);
+
+            const genre = document.createElement("p");
+            genre.innerText = "Género: " + data.genre;
+            contentDiv.appendChild(genre);
+
+            const type = document.createElement("p");
+            type.innerText = "Tipo: " + data.typeShow;
+            contentDiv.appendChild(type);
+
+            const removeButton = document.createElement("button");
+            removeButton.className = "remove-button";
+            removeButton.innerText = "Remove";
+            removeButton.onclick = function () {
+                removeFavorite(key);
+            };
+            contentDiv.appendChild(removeButton);
+
+            itemDiv.appendChild(contentDiv);
+            container.appendChild(itemDiv);
+        }
+
+        function removeFavorite(key) {
+            const favoriteRef = ref(database, `users/${currentUser.uid}/favorites/${key}`);
+            remove(favoriteRef)
+                .then(() => {
+                    console.log("Removed favorite with key:", key);
+                    loadFavorites(); 
+                })
+                .catch((error) => {
+                    console.error("Error removing favorite:", error);
+                });
+        }
+    </script>
+</body>
+</html>

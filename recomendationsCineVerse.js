@@ -1,6 +1,8 @@
 var typeShow;
 var typeGenre;
 
+document.getElementById("buttonFilter").onclick = getShow;
+
     document.getElementById('myDropdown').addEventListener('change', function() 
     {
         typeGenre = this.value;
@@ -70,41 +72,57 @@ function getShow()
         .catch( (error) => console.log(error))
     }
 
-    function parseShow(json)
-    {
+function parseShow(json) {
     const baseImageUrl = "https://image.tmdb.org/t/p/w500";
     const results = json.results;
 
-    for (let i = 0; i < results.length; i++) 
-    {
-
+    for (let i = 0; i < results.length; i++) {
         let movieImage = baseImageUrl + results[i].poster_path;
+        let movieId = results[i].id;
+        let movieName = typeShow === "movie" ? results[i].title : results[i].original_name;
 
         // Create a container div for each movie
         let containerDiv = document.createElement("div");
-        containerDiv.className = "movie-container";  // Optional: add a class for styling
+        containerDiv.className = "movie-container";
 
         // Create an img element
         let imgElement = document.createElement("img");
         imgElement.src = movieImage;
         imgElement.alt = "Movie Poster " + (i + 1);
-        imgElement.id = "showImg" + (i + 1);
 
         // Create a p element for the movie name
         let nameElement = document.createElement("p");
-        nameElement.className = "movie-name";  // Optional: add a class for styling
-        if (typeShow === "movie") nameElement.innerText = results[i].title;  // Use results[i].name for TV shows
-        else nameElement.innerText = results[i].original_name; 
+        nameElement.className = "movie-name";
+        nameElement.innerText = movieName;
 
+        // Create a div for the checkbox and label
+        let favoriteDiv = document.createElement("div");
+        favoriteDiv.className = "favorite-container";
 
-        // Append the img and name elements to the container div
+        // Create a label element for the checkbox
+        let labelElement = document.createElement("label");
+        labelElement.innerText = "Add to favorites:";
+
+        // Create a checkbox for favorite
+        let checkboxElement = document.createElement("input");
+        checkboxElement.type = "checkbox";
+        checkboxElement.className = "favorite-checkbox";
+        checkboxElement.addEventListener("change", function() {
+            window.toggleFavorite(movieId, movieName, movieImage, typeGenre,typeShow, checkboxElement.checked);
+        });
+
+        // Append the label and checkbox to the favorite div
+        favoriteDiv.appendChild(labelElement);
+        favoriteDiv.appendChild(checkboxElement);
+
+        // Append img, name, and favorite div to the container div
         containerDiv.appendChild(imgElement);
         containerDiv.appendChild(nameElement);
+        containerDiv.appendChild(favoriteDiv);
 
         // Append the container div to the image container
         document.getElementById("imageContainer").appendChild(containerDiv);
     }
-    // Reset dropdowns after processing
     document.getElementById('myDropdown').selectedIndex = 0;
     document.getElementById('myDropdown2').selectedIndex = 0;
 }
